@@ -12,6 +12,8 @@ public class Input {
         int k = 0;
         while(reader.hasNext()) {
             String line = reader.nextLine();
+            // Note: this DOES NOT WORK if the names of the asteroids do not
+            // start with a "("
             if(line.startsWith("(")) {
                 k++;
             }
@@ -38,7 +40,7 @@ public class Input {
             n = Integer.parseInt(reader.next());
        }
        else {
-           System.out.println("File not of valid format - read the ReadMe");
+           System.out.println("File not of valid format - read the documentations");
        }
        
        double[][] tempData;

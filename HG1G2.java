@@ -32,7 +32,8 @@ public class HG1G2 extends LeastSquares {
                 errors[m] = 0.03;
             }
 
-            // Least Square Fit
+            // Least Squares fit for the data
+            // results contains the coefficients and the A-matrix
             Results results = LeastSquares(basisFunctions, data[j], errors);
             double[] coeffs = results.getCoeffs();
 
@@ -43,6 +44,10 @@ public class HG1G2 extends LeastSquares {
             double[] fitErrors = Errors.HG1G2Errors(results.getMatrix(), coeffs);
             double[] confidence = new double[18];
 
+            // Calculating the confidence intervals
+            // fitErrors 0-2 means (H, G1, G2)
+            // fitErrors 6-8 lower std deviations
+            // fitErrors 3-5 upper std deviations
             confidence[0] = fitErrors[0] - 3 * fitErrors[6];
             confidence[1] = fitErrors[1] - 3 * fitErrors[7];
             confidence[2] = fitErrors[2] - 3 * fitErrors[8];

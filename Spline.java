@@ -41,6 +41,8 @@ public class Spline implements Functions{
      * @return
      */
     @Override
+    
+    // getValue - method uses SplineFunction located in Splines.java
     public double getValue(double x) {
         Spline spline = new Spline(this.knots, this.yval, this.deriv);
         double value = Splines.SplineFunction(spline, x);

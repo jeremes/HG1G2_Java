@@ -2,6 +2,9 @@
 package AsteroidPhaseCurveAnalyzer;
 
 public class PolynomialFunction  implements Functions{
+    // coefficients for polynomials
+    // and the x values
+    
     private double[] coeff;
     private double[] x;
     

@@ -4,6 +4,7 @@ package AsteroidPhaseCurveAnalyzer;
 public class Basisfunctions {
     
     public static PiecewiseFunctions[] Basisfunctions(double[] x) {
+        // defining the basis functions using piecewise functions
         
         double[] coeffA1 = new double[2];
         coeffA1[0] = 1.0;

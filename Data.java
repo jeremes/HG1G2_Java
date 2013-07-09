@@ -2,6 +2,9 @@
 package AsteroidPhaseCurveAnalyzer;
 
 public class Data {
+    // Contains the name of the asteroid and the data in an array
+    // First column: x (or alpha) values
+    // Second column: y (or mag) values
     private String name;
     private double[][] data;
     

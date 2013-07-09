@@ -32,7 +32,7 @@ public class PiecewiseFunctions {
     }
     
     public void addComponent(double low, double high, Functions F) {
-        // Olisiko tähän parempaa metodia kuin manuaalinen katenointi?
+        // Manual catenating: new function and limits go to the bottom
         Functions[] tempFuncs = this.functions;
         double[][] tempLimits = this.limits;
         
@@ -68,6 +68,7 @@ public class PiecewiseFunctions {
     public double getValue(double x) {
         int j = -1;
         
+        // Finding the right interval
         for(int i = 0; i < this.nComponents; i++) {
             if(x >= this.limits[i][0] && x <= this.limits[i][1]){
                 j = i;
@@ -81,7 +82,7 @@ public class PiecewiseFunctions {
         }
         
         else {
-            throw new IllegalArgumentException("Value outside of splines");
+            throw new IllegalArgumentException("Value outside of basis functions");
         }
     }
     

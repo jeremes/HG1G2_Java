@@ -3,6 +3,9 @@ package AsteroidPhaseCurveAnalyzer;
 public class Splines {
     
     public static Spline Splines(double[] xval, double[] yval, double[] deriv) {
+        // Defining a spline by getting the knots and solving the tri-diagonal 
+        // equation explained in the documentation
+        
         int N = xval.length;
         int nDeriv = deriv.length;
         double[] A = new double[N];
@@ -25,7 +28,7 @@ public class Splines {
         for(int i = 1; i < (N-1); i++) {
             A[i] = 1/(xval[i] - xval[i-1]);
             B[i] = 2/(xval[i] - xval[i-1]) + 2/(xval[i+1] - xval[i]);
-            C[i] = 1/(xval[i+1] - xval[i]); //uutta!
+            C[i] = 1/(xval[i+1] - xval[i]); 
             R[i] += 3*(yval[i] - yval[i-1])/((xval[i]-xval[i-1])*(xval[i]-xval[i-1]));
             R[i] += 3*(yval[i+1] - yval[i])/((xval[i+1]-xval[i])*(xval[i+1]-xval[i]));
         }
@@ -44,7 +47,7 @@ public class Splines {
         
         for(int i = N-2; i > 0; i--) {
             U[i] = U[i] - gamma[i+1]*U[i+1];
-            
+            // U's are the new derivatives
         }
         
         double[] tempXval = xval;
@@ -56,8 +59,9 @@ public class Splines {
         
     }
     
-    //This function gives polynomial coefficients for specific part
     public static double SplineFunction(Spline spline, double x) {
+        // calculating the value of a spline at a specific point x
+       
         int nKnots = spline.getKnots();
         int i = -1;
         

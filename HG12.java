@@ -33,6 +33,7 @@ public class HG12 extends LeastSquares{
                 errors[i] = 0.03;
             }
 
+            // calculating the least squares solution and also the coefficient matrix
             Results results = LeastSquares.LeastSquaresG12(basisFunctions, data[j], errors);
             double[] coeffs = results.getCoeffs();
             Matrix aMatrix = results.getMatrix();
@@ -42,6 +43,10 @@ public class HG12 extends LeastSquares{
             double[] fitErrors = Errors.HG12Errors(results.getMatrix(), coeffs);
             double[] confidence = new double[18];
 
+            // Calculating the confidence intervals
+            // fitErrors 0-2 means (H, G1, G2)
+            // fitErrors 6-8 lower std deviations
+            // fitErrors 3-5 upper std deviations
             confidence[0] = fitErrors[0] - 3 * fitErrors[6];
             confidence[1] = fitErrors[1] - 3 * fitErrors[7];
             confidence[2] = fitErrors[2] - 3 * fitErrors[8];

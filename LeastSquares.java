@@ -13,11 +13,13 @@ public class LeastSquares {
             xvalues[i] = data[i][0]* Math.PI/180;
         }
         
+        // Transforming the yvalues (see developer's guide)
         double[] yvalues = new double[nData];
         for (int i = 0; i < nData; i++) {
             yvalues[i] = Math.pow(10.0, -0.4*data[i][1]);
         }
         
+        // Transforming the errors from tha magnitude realm
         double[] sigmas = new double[nData];
         for(int i = 0; i < nData; i++) {
             sigmas[i] = yvalues[i]*(Math.pow(10.0, 0.4*errors[i]) - 1);
@@ -27,6 +29,8 @@ public class LeastSquares {
         Matrix aMatrix = new Matrix(nData, nFuncs); 
         for(int i = 0; i < nData; i++) {
             for(int j = 0; j < nFuncs; j++) {
+                // getValue is getting the value of basis function j
+                // at xvalues[i], for aMatrix this is then divided by errors
                 aMatrix.set(i, j, (basis[j].getValue(xvalues[i]))/sigmas[i]);
             }
         }
@@ -45,6 +49,7 @@ public class LeastSquares {
         Matrix Coeffs;
         Matrix Y = new Matrix(yvalues, nData);
         
+        // Solving the equation Y = A*coeffs by QR decomposition
         QRDecomposition qr = new QRDecomposition(aMatrix);
         Coeffs = qr.solve(Y);
         
@@ -60,6 +65,11 @@ public class LeastSquares {
     
     @SuppressWarnings("empty-statement")
     public static Results LeastSquaresG12(PiecewiseFunctions[] basis, Data ddata, double[] errors) {
+        // this method uses the same principles as the above, but this time for 
+        // two different definitions depending on the value of G12
+        //
+        // the one chosen is the one with smaller rms-error
+        
         int nData = ddata.getSize();
         double b10 = 0.06164;
         double b11 = 0.7527;

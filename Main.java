@@ -8,8 +8,11 @@ import javax.swing.SwingUtilities;
 public class Main {
     
     public static void main(String[] args) throws FileNotFoundException {
+        // Calls GUI
         GUI GUinterface = new GUI();
         SwingUtilities.invokeLater(GUinterface);
+        
+        // Uncomment the lines below to override the GUI 
         
         //File file = new File(path); // insert the path - remember ""
         //String output = new String();
